@@ -24,7 +24,8 @@ public class NewBehaviourScript : MonoBehaviour
     void Update()
     {
         movementDirection = new Vector2(UnityEngine.Input.GetAxis("Horizontal"), UnityEngine.Input.GetAxis("Vertical"));
-        if (movementDirection.magnitude == 5f && !normal.isPlaying)
+        // Debug.Log(movementDirection.magnitude);
+        if (movementDirection.magnitude != 0f && movementSpeed == 5f && !normal.isPlaying)
         {
             sprinting.Stop();
             normal.Play();
@@ -43,12 +44,12 @@ public class NewBehaviourScript : MonoBehaviour
         if (UnityEngine.Input.GetKey(KeyCode.LeftShift))
         {
             sprint();
-            if (movementDirection.magnitude >= 6.99f && !sprinting.isPlaying)
+            if (movementDirection.magnitude != 0f && movementSpeed == 7f && !sprinting.isPlaying)
             {
                 normal.Stop();
                 sprinting.Play();
             }
-            else if (movementDirection.magnitude < 6.99f && sprinting.isPlaying)
+            else if (movementSpeed == 5f && sprinting.isPlaying)
             {
                 sprinting.Stop();
             }
@@ -58,7 +59,7 @@ public class NewBehaviourScript : MonoBehaviour
             crouch();
             if (movementDirection.magnitude == 3f && sprinting.isPlaying)
             {
-
+                sprinting.Stop();
             }
         }
         else
